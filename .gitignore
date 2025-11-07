@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+venv/
+.env
+
+# Data & embeddings
+data/
+data_output/
+data_preprocessing/
+*.faiss
+*.json
+*.pdf
+*.csv
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
