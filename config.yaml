@@ -1,0 +1,27 @@
+# =========================
+# Cấu hình Server / Streamlit
+# =========================
+server:
+  host: "127.0.0.1"       # Host server API
+  port: 8000              # Cổng server API
+
+streamlit:
+  port: 8501              # Cổng Streamlit app
+
+# =========================
+# Model & Embedding
+# =========================
+model:
+  llm_model: "gemma2b-13b"   # Tên LLM dùng cho chat / RAG
+  embedding_model: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"  # Model embedding
+  tokenizer: null             # Nếu cần tokenizer riêng (có thể null)
+  RERANK_MODEL :  "cross-encoder/ms-marco-MiniLM-L-6-v2"
+
+# =========================
+# Vector DB / FAISS
+# =========================
+vector_db:
+  index_path: "./src/faiss.index"   # File FAISS local
+  metadata_path: "./src/docs.json"  # Metadata / JSON lưu raw text
+  top_k: 3                                     # Lấy top k result khi retrieve
+
