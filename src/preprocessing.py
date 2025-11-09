@@ -1,7 +1,8 @@
 import os
 import re
 from docx import Document
-from data_preprocessing import split_heading_data as shd
+import split_heading_data as shd
+
 import sys
 import io
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')

@@ -4,8 +4,13 @@ from keybert import KeyBERT
 
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
+from config_loader import load_config
+
+config = load_config()
+
+
 tokenizer = AutoTokenizer.from_pretrained("VietAI/vit5-base")
-model = AutoModelForSeq2SeqLM.from_pretrained("VietAI/vit5-base")
+model = AutoModelForSeq2SeqLM.from_pretrained(config["model"]["summary_model"])
 
 def extract_summary(text, max_len=128):
     input_ids = tokenizer(
@@ -21,7 +26,7 @@ def extract_summary(text, max_len=128):
 
 
 # Dùng cùng model multilingual để đồng nhất embedding
-kw_model = KeyBERT(model="intfloat/multilingual-e5-small")
+kw_model = KeyBERT(model=config["model"]["keywords_model"])
 
 def extract_keywords(text, top_k=10):
     keywords = kw_model.extract_keywords(

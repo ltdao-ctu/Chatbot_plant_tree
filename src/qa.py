@@ -6,18 +6,19 @@ import faiss
 import json
 import requests
 from sentence_transformers import SentenceTransformer, CrossEncoder
+import os
+from config_loader import load_config
 
-# Giả sử bạn đã có:
-# - embedder: SentenceTransformer
-# - index: FAISS index
-# - docs: danh sách metadata (docs.json đã load sẵn)
+config = load_config()
 
 
-MODEL_NAME = "intfloat/multilingual-e5-small"
-INDEX_FILE = "faiss.index"
-META_FILE = "docs.json"
-RERANK_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # thư mục chứa file hiện tại
+INDEX_FILE = os.path.join(BASE_DIR, "..", "faiss.index")
+META_FILE = os.path.join(BASE_DIR, "..", "docs.json")
+
+RERANK_MODEL = config["model"]["RERANK_MODEL"]
+MODEL_NAME = config["model"]["embedding_model"]
 # --------------------------------------------
 # 🧠 Load model + dữ liệu
 embedder = SentenceTransformer(MODEL_NAME)
@@ -165,24 +166,6 @@ def call_ollama(prompt: str, model: str = "gemma:2b", temperature: float = 0.7, 
     except Exception as e:
         return f"⚠️ Lỗi không xác định: {e}"
     
-
-# === Main answer function ===
-# def answer(query, top_k=3, model="gemma:2b"):
-#     retrieved = retrieve(query, top_k=top_k)
-#     if not retrieved:
-#         return "Xin lỗi, tôi không tìm thấy thông tin trong cơ sở dữ liệu."
-
-#     # In ra top-k để theo dõi
-#     print("\n=== Retrieved context ===")
-#     for i, r in enumerate(retrieved, 1):
-#         print(f"[{i}] (source: {r['source']}) {r['text'][:200]}...")
-#     print("=========================\n")
-
-#     prompt = make_prompt(query, retrieved)
-#     print(f"[DEBUG] Prompt length: {len(prompt)} chars\n")
-
-#     return call_ollama(prompt, model=model)
-
 
 
 def answer(query: str, top_k: int = 5, model: str = "gemma:2b", debug: bool = True) -> str:

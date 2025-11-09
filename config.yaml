@@ -13,15 +13,17 @@ streamlit:
 # =========================
 model:
   llm_model: "gemma2b-13b"   # Tên LLM dùng cho chat / RAG
-  embedding_model: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"  # Model embedding
+  embedding_model: "intfloat/multilingual-e5-small"  # Model embedding
   tokenizer: null             # Nếu cần tokenizer riêng (có thể null)
-  RERANK_MODEL :  "cross-encoder/ms-marco-MiniLM-L-6-v2"
+  RERANK_MODEL :  "cross-encoder/ms-marco-MiniLM-L-6-v2"  # Model rerank
+  summary_model: "VietAI/vit5-base" # Model summary
+  keywords_model: "intfloat/multilingual-e5-small"  # Model Keywords
 
 # =========================
 # Vector DB / FAISS
 # =========================
 vector_db:
-  index_path: "./src/faiss.index"   # File FAISS local
-  metadata_path: "./src/docs.json"  # Metadata / JSON lưu raw text
-  top_k: 3                                     # Lấy top k result khi retrieve
+  index_path: "./faiss.index"   # File FAISS local
+  metadata_path: "./docs.json"  # Metadata / JSON lưu raw text
+  top_k: 3  # Lấy top k result khi retrieve
 

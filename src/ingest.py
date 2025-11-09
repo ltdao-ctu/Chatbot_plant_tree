@@ -7,18 +7,22 @@ import numpy as np
 import faiss
 from tqdm import tqdm
 from sentence_transformers import SentenceTransformer
-from src.extractors import auto_extract
-from src.utils import extract_summary, extract_keywords
-import yaml
-with open("config.yaml", "r") as f:
-    config = yaml.safe_load(f)
+from extractors import auto_extract
+from utils import extract_summary, extract_keywords
+from config_loader import load_config
+
+config = load_config()
+
+
 # ---------------------------------------------------------------
 # 🔧 Cấu hình
-DATA_DIR = "data_output"
-INDEX_FILE = "faiss.index"
-META_FILE = "docs.json"
 
-MODEL_NAME = "intfloat/multilingual-e5-small"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # thư mục chứa file hiện tại
+INDEX_FILE = os.path.join(BASE_DIR, "..", "faiss.index")
+META_FILE = os.path.join(BASE_DIR, "..", "docs.json")
+DATA_DIR = os.path.join(BASE_DIR, "..", "data_output")
+
+MODEL_NAME = config["model"]["embedding_model"]
 embedder = SentenceTransformer(MODEL_NAME)
 dimension = embedder.get_sentence_embedding_dimension()
 
