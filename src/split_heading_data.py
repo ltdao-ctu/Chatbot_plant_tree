@@ -1,8 +1,9 @@
 from docx import Document
 import os
 import re
-
-def split_docx_by_content(input_path, output_dir="../data_output"):
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # thư mục chứa file hiện tại
+DATA_DIR = os.path.join(BASE_DIR, "..", "data_output")
+def split_docx_by_content(input_path, output_dir=DATA_DIR):
     """
     Tách file .docx theo logic:
       - Heading có text → tách file, giữ heading cha
