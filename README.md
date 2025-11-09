@@ -25,12 +25,12 @@ Kết quả:
 
 5️⃣ Khởi chạy server API
 Chạy:
-    python ./server.py
+    python ./src/server.py
 Mặc định server chạy tại:
 👉 http://127.0.0.1:8000
 
 6️⃣ Khởi chạy giao diện Streamlit
 Chạy:
-    streamlit run streamlit_app.py
+    streamlit run ./src/streamlit_app.py
 Truy cập giao diện tại:
 👉 http://localhost:8501
