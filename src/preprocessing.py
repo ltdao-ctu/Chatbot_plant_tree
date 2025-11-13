@@ -18,6 +18,7 @@ def process_all_docx_in_tree(root_dir):
                 output_dir = os.path.join(root_dir, "data_output", rel_path, filename[:-5])
                 print(f"📄 Đang xử lý: {input_path}")
                 shd.split_docx_by_content(input_path)
+    print(f"📄 đã xử lý xong")
 
 
 # --- Chạy thử ---
