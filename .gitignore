@@ -15,6 +15,7 @@ data_preprocessing/
 *.json
 *.pdf
 *.csv
+*.index
 
 # Logs
 *.log

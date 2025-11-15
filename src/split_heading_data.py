@@ -72,7 +72,7 @@ def split_docx_by_content(input_path, output_dir=DATA_DIR):
             new_p.style = p.style
 
         safe_name = re.sub(r'[\\/*?:"<>|]', "_", title or f"part_{i}")
-        output_path = os.path.join(output_dir, f"{i:02d}_{safe_name}")
+        output_path = os.path.join(output_dir, f"{i:02d}_{safe_name}.docx")
         new_doc.save(output_path)
         print(f"✅ Đã tạo: {output_path}")
 

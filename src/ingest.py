@@ -28,12 +28,24 @@ dimension = embedder.get_sentence_embedding_dimension()
 
 # ---------------------------------------------------------------
 # 🧠 Tạo hoặc load FAISS index
+# if os.path.exists(INDEX_FILE):
+#     index = faiss.read_index(INDEX_FILE)
+#     with open(META_FILE, "r", encoding="utf-8") as f:
+#         docs = json.load(f)
+# else:
+#     index = faiss.IndexFlatIP(dimension)  # cosine similarity
+#     docs = []
+
 if os.path.exists(INDEX_FILE):
     index = faiss.read_index(INDEX_FILE)
+else:
+    index = faiss.IndexFlatL2(dimension)
+
+# ---- Load hoặc tạo metadata ----
+if os.path.exists(META_FILE):
     with open(META_FILE, "r", encoding="utf-8") as f:
         docs = json.load(f)
 else:
-    index = faiss.IndexFlatIP(dimension)  # cosine similarity
     docs = []
 
 # ---------------------------------------------------------------
